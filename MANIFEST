@@ -1,0 +1,9 @@
+bin/pod2htmll10n
+Changes
+lib/Pod/L10N/Format.pod
+lib/Pod/L10N/Html.pm
+Makefile.PL
+MANIFEST
+README
+t/Pod-L10N.t
+META.yml                                 Module meta-data (added by MakeMaker)
