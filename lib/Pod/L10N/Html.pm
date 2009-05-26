@@ -3,7 +3,7 @@ use strict;
 require Exporter;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
-$VERSION = 0.01;
+$VERSION = '0.02';
 @ISA = qw(Exporter);
 @EXPORT = qw(pod2html htmlify);
 @EXPORT_OK = qw(anchorify);
@@ -70,8 +70,6 @@ Uses C<$Config{pod2html}> to setup default options.
 =head1 BUGS
 
 =over
-
-=item C<=item> text alternation does not work.
 
 =item C<=encoding> support has some limitations.
 
@@ -977,6 +975,11 @@ sub scan_items {
 	} else {
 	    next;
 	}
+        my $next = $poddata[$i + 1];
+        if ($next =~ /^\((.*)\).?$/s){
+          $alttext{$item} = $1;
+          $deleted[$i + 1] = 1;
+        }
 	my $fid = fragment_id( $item );
 	$$itemref{$fid} = "$pod" if $fid;
     }
@@ -1042,7 +1045,12 @@ sub emit_item_tag($$$){
     } else {
         my $name = $item;
         $name = anchorify($name);
-	print HTML qq{<a name="$name" class="item">}, process_text( \$otext ), '</a>';
+	my $convert = $otext;
+	my $alt = $alttext{depod($convert)};
+	if(defined $alt){
+	    $convert = $alt;
+	}
+	print HTML qq{<a name="$name" class="item">}, process_text( \$convert ), '</a>';
     }
     print HTML "</strong>\n";
     undef( $EmittedItem );
@@ -1550,6 +1558,9 @@ sub process_text1($$;$$){
                 if( $url ){
                     if( ! defined( $linktext ) ){
                         $linktext = $ident;
+                        if(defined $alttext{$ident}){
+                          $linktext = $alttext{$ident};
+                        }
                         $linktext .= " in " if $ident && $page;
                         $linktext .= "the $page manpage" if $page;
                     }
@@ -1753,6 +1764,9 @@ sub page_sect($$) {
 	     $Pages{ $page_name } =~ /([^:]*$page)\.(?:pod|pm):/
 	   ) {
 	    $page = $1 ;
+
+	    $link = "$Htmlroot/$page.html";
+	    $link .= "#" . anchorify( $section ) if ($section);
 	}
 	else {
 	    # NOTE: This branch assumes that all A::B pages are located in
@@ -1765,9 +1779,10 @@ sub page_sect($$) {
 	    # Maybe a hints file so that the links point to the correct places
 	    # nonetheless?
 
+	    # workaround: no link
+	    $link = '';
+
 	}
-	$link = "$Htmlroot/$page.html";
-	$link .= "#" . anchorify( $section ) if ($section);
     } elsif (!defined $Pages{$page}) {
 	$link = "";
     } else {

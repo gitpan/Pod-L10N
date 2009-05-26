@@ -1,4 +1,10 @@
 Revision history for Perl extension Pod::L10N.
 
+0.02  Wed May 27 02:28:18 JST 2009
+
+	- add =item-substitution
+	- suppress link to non-exist modules
+	- add some tests
+
 0.01  Tue Jul 30 02:40:54 JST 2008
 	- Initial release (without tests)

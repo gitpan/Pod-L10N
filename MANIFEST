@@ -4,6 +4,17 @@ lib/Pod/L10N/Format.pod
 lib/Pod/L10N/Html.pm
 Makefile.PL
 MANIFEST
+pod2htmd.tmp
+pod2htmi.tmp
 README
-t/Pod-L10N.t
+t/00_compile.t
+t/11_substitute.t
+t/99_pod.t
+t/lib/pod2htmd.tmp
+t/lib/pod2htmi.tmp
+t/lib/Test/Output.pm
+t/lib/Test/Output/Tie.pm
+t/substitute.html
+t/substitute.out
+t/substitute.pod
 META.yml                                 Module meta-data (added by MakeMaker)
