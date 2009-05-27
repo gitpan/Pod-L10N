@@ -9,5 +9,6 @@ WriteMakefile(
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Pod/L10N/Html.pm', # retrieve abstract from module
 	   EXE_FILES      => [qw(bin/pod2htmll10n)],
+           LICENSE        => 'perl',
 	   AUTHOR         => 'SHIRAKATA Kentaro <argrath@cpan.org>') : ()),
 );

@@ -1,8 +1,8 @@
 --- #YAML:1.0
 name:                Pod-L10N
-version:             0.02
+version:             0.02_01
 abstract:            ~
-license:             ~
+license:             perl
 author:              
     - SHIRAKATA Kentaro <argrath@cpan.org>
 generated_by:        ExtUtils::MakeMaker version 6.42
