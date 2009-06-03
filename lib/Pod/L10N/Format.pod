@@ -80,7 +80,8 @@ L<perlpod>, L<Pod::Html>, L<Pod::L10N::Html>
 
 =head1 COPYRIGHT
 
-This document is distributed under the Artistic License.
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

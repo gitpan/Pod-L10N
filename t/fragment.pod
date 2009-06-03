@@ -1,0 +1,39 @@
+=head1 NAME
+
+Pod::Html::TestFragment - a POD fragment for testing
+
+=head1 DESCRIPTION
+
+A well-formed POD file.
+
+A link to L<Test::Pod::Html::Dummy>.
+
+=over 8
+
+=item $var
+
+A variable.
+
+=item ->madness
+
+A method.
+
+=item m/match/x
+
+A regexp.
+
+=item do {block}
+
+Fancy stuff.
+
+=item see Module	&AFTERTAB
+
+Weird module stuff.
+
+=item #$%
+
+Naughty stuff.
+
+=back
+
+=cut

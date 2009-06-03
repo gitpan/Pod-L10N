@@ -1,0 +1,9 @@
+=head1 NAME
+
+xreftodo - more POD cross-referencing
+
+=head1 IMPLEMENTATION
+
+The links L<perlunitut> and
+perlunitut(1) should be the same.
+

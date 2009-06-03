@@ -1,39 +1,66 @@
-# Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl Pod-L10N.t'
+#use Test::More skip_all => 'for some reason, this test fail on some platform';
+use Test::More tests => 1;
 
-#########################
-
-# change 'tests => 1' to 'tests => last_test_to_print';
-
-use Test::More skip_all => 'for some reason, this test fail on some platform';
+use Cwd;
 use Pod::L10N::Html;
+use Config;
+use File::Spec::Functions;
 
-sub diff {
-    my ($outfn, $expectfn) = @_;
-    my $f = '';
-    my $line = 1;
-
-    open my $of, '<', $outfn;
-    open my $ef, '<', $expectfn;
-
-    while(<$of>){
-	my $e = <$ef>;
-	if($_ ne $e){
-	    $f = sprintf("differ line %d\n---\n%s---\n%s", $line, $_, $e);
-	    last;
-	}
-	$line++;
-    }
-    close $of;
-    close $ef;
-    ok($f eq '', $f);
+BEGIN {
+    chdir 't' if -d 't';
+    unshift @INC, qw( ../lib ../lib/Pod/t );
 }
+
+END {
+    # pod2html creates these
+    1 while unlink "pod2htmd.tmp";
+    1 while unlink "pod2htmi.tmp";
+}
+
+my $CWD      = Cwd::cwd();
+my $CACHEDIR = "$CWD/subdir";
 
 TODO: {
     local $TODO = 'may error on some platform';
 
-    pod2html("--infile=t/substitute.pod",
-	     "--outfile=t/substitute.out");
-    diff('t/substitute.out', 't/substitute.html');
+    convert_ok("substitute.pod", "substitute.html", "l10n substitution");
+}
+
+sub slurp {
+    my $file = shift;
+    open my $in, $file or die "cannot open $file for input: $!";
+    local $/ = undef;
+    my $rec = <$in>;
+    close $in;
+    return $rec;
+}
+
+sub convert_ok {
+    my $podfile  = shift;
+    my $htmlfile = shift;
+    my $testname = shift;
+    my @extra_args = @{shift || []};
+
+    my $base_dir = catdir $CWD, updir(), $ENV{PERL_CORE} ? ("lib", "Pod") : (curdir());
+    my $infile   = $podfile;
+    my $outfile  = "$htmlfile-t";
+
+    Pod::L10N::Html::pod2html(
+        "--podpath=t",
+        "--podroot=$base_dir",
+        "--infile=$infile",
+        "--outfile=$outfile",
+        @extra_args,
+    );
+
+    my $result = slurp($outfile);
+
+    my $expect = slurp($htmlfile);
+    $expect =~ s/\[PERLADMIN\]/$Config::Config{perladmin}/;
+
+    is($expect, $result, $testname) and do {
+        # remove the results if the test succeeded
+        1 while unlink $outfile;
+    };
 }
 

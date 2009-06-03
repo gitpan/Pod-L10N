@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>title</title>
-<meta http-equiv="content-type" content="text/html; charset=euc-jp" />
-<link rev="made" href="[PERLADMIN]" />
+<title>unclosed - test unclosed POD constructs.</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
 </head>
 
 <body style="background-color: white">
@@ -16,7 +16,7 @@
 
 <ul>
 
-	<li><a href="#title">タイトル</a></li>
+	<li><a href="#name">NAME</a></li>
 </ul>
 
 <hr name="index" />
@@ -25,13 +25,10 @@
 
 <p>
 </p>
-<hr />
-<h1><a name="title">タイトル</a></h1>
-<dl>
-<dt><strong><a name="item" class="item">アイテム</a></strong></dt>
-
-</dl>
-<p><a href="#title">タイトル</a>, <a href="#item">アイテム</a>, <em>Foo::Bar</em></p>
+<h1><a name="name">NAME</a></h1>
+<p>unclosed - test unclosed POD constructs.</p>
+<p>This is <strong></strong>bold</p>
+<p>This is <code></code>code</p>
 
 </body>
 

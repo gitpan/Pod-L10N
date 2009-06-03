@@ -1,0 +1,24 @@
+=head1 NAME
+
+xref - test POD cross-referencing
+
+=head1 IMPLEMENTATION
+
+Have a look at the L<torture/GWAP> method in the L<Test Torture|torture>
+webpage or else check out your man(1) page. Or perl(1).
+
+=head2 SEE ALSO
+
+=over 8
+
+=item L<perlunitut>
+
+=item L<Pod::Html::TestFragment/$var>.
+
+=back
+
+When in doubt, send e-mail to root@example.com for more information.
+If that bounces, you could try <postmaster@example.com>
+or the DNS god (hostmaster@example.com) instead.
+
+=cut

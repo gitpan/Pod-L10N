@@ -1,0 +1,66 @@
+=head1 NAME
+
+perlutil - utilities packaged with the Perl distribution
+
+=head1 DESCRIPTION
+
+Along with the Perl interpreter itself, the Perl distribution installs a
+range of utilities on your system. There are also several utilities
+which are used by the Perl distribution itself as part of the install
+process. This document exists to list all of these utilities, explain
+what they are for and provide pointers to each module's documentation,
+if appropriate.
+
+=head1 LIST OF UTILITIES
+
+=head2 Documentation
+
+=over 3
+
+=item L<perldoc|perldoc>
+
+The main interface to Perl's documentation is C<perldoc>, although
+if you're reading this, it's more than likely that you've already found
+it. F<perldoc> will extract and format the documentation from any file
+in the current directory, any Perl module installed on the system, or
+any of the standard documentation pages, such as this one. Use 
+C<perldoc E<lt>nameE<gt>> to get information on any of the utilities
+described in this document.
+
+=item L<pod2man|pod2man> and L<pod2text|pod2text>
+
+If it's run from a terminal, F<perldoc> will usually call F<pod2man> to
+translate POD (Plain Old Documentation - see L<perlpod> for an
+explanation) into a manpage, and then run F<man> to display it; if
+F<man> isn't available, F<pod2text> will be used instead and the output
+piped through your favourite pager.
+
+=item L<pod2html|pod2html> and L<pod2latex|pod2latex>
+
+As well as these two, there are two other converters: F<pod2html> will
+produce HTML pages from POD, and F<pod2latex>, which produces LaTeX
+files.
+
+=back
+
+=head2 Convertors
+
+To help you convert legacy programs to Perl, we've included three
+conversion filters:
+
+=over 3
+
+=item L<a2p|a2p>
+
+F<a2p> converts F<awk> scripts to Perl programs; for example, C<a2p -F:>
+on the simple F<awk> script C<{print $2}> will produce a Perl program
+based around this code:
+
+    while (<>) {
+        ($Fld1,$Fld2) = split(/[:\n]/, $_, 9999);
+        print $Fld2;
+    }
+
+=back
+
+=cut

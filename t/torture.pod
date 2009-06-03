@@ -1,0 +1,153 @@
+=pod
+
+This is a I<fragment> of C<POD> with nothing special about it.
+A true URI: L<http://www.landgren.net/perl/>.
+And L<C<http://www.perl.org/>>.
+
+C<this is verbatim>
+
+=for html <hr> <img src="thang.png">
+<p> This is a raw HTML paragraph </p>
+
+More text after HTMLE<nbsp>inclusion.
+
+Fish	Colour	Count	Season	Fruit
+cod	red	4	summer	apple
+tuna	blue	91	autumn	orange
+sole	yellow	135	winter	raspberry
+salmon	green	8260	spring	melon
+
+One	line	with	only	tabs.
+
+A line with no tabs.
+One	line	with	tabs.
+A second line with no tabs.
+
+=cut
+
+This is not POD.
+
+  It could be code.
+
+=pod
+
+A line with no tabs.
+And	a	second	line	with	tabs.
+
+Obsolete paraZ<> and a Z<another> one.C<>C<
+>
+
+=bogus directive
+
+=head3 Methods
+
+=over 2
+
+=item tequila
+
+When water just won't do.
+
+=item PWOK
+
+The PWOK method is called after L<C<B<GWAP>>>.
+
+The PWOK method is I<never called before L<C<B<GWAP>>>>.
+
+=item B<GWAP>
+
+The GWAP method.
+
+=over 4
+
+=item 1
+
+One.
+
+=item 2
+
+Two.
+
+=item 3
+
+Three.
+
+=back
+
+=item
+
+Nothing happens by default.
+
+=back
+
+=back
+
+Second para after bogus =back directive.
+
+	Verbatim	text	with
+	tab-delimited	columns
+	all		in	a	row
+
+The B<
+bold on another line with I<italic here
+and on the C<GWAP> line or L<C<B<perlunitut>
+>
+> until no
+more here>
+and so end here>.
+
+=begin html
+
+<table>
+<tr><td>cell</td><td>cell two</td></tr>
+<tr><td>another row</td><td>last cell</td></tr>
+</table>
+
+=end html
+
+=begin advertisement
+
+Eat at Joe's
+
+=end advertisement
+
+Back to the POD for C<code text B<with bold>> and C<more
+with I<italic>>. See also C<PWOK> and C<GWAP>.X<
+
+   verbatim link to perlunitut.
+
+=for pod2html <p>Black and white</p></p>
+
+=for devnull <p>For nothing</p>
+
+=over
+
+=comment no items here
+
+=back
+
+=for illustration
+not-a-graphic
+
+=item *
+
+An L<impossible> =item with no prior =over.
+
+=for pod2html
+
+=begin pod2html
+
+=begin html
+
+=end html
+
+=begin html <p>
+
+Something
+
+</p>
+
+=end html
+
+=end pod2html
+
+=begin podhtml

@@ -1,0 +1,5 @@
+=head1 My Title
+
+This pod has no title, so the first =head1 directive is used.
+
+=head1 Not this one

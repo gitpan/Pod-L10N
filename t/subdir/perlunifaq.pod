@@ -1,0 +1,9 @@
+=head1 NAME
+
+perlunifaq - Perl Unicode FAQ
+
+=head1 Q and A
+
+This is a list of questions and answers about Unicode in Perl, intended to be
+read after L<perlunitut>.
+

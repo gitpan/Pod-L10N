@@ -1,0 +1,11 @@
+=head1 NAME
+
+die-end - What happens if =begin and =end are unbalanced
+
+=head1 DESCRIPTION
+
+Watch what happens when an =end directive is encountered.
+
+=end html
+
+=cut

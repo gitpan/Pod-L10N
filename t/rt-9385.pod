@@ -1,0 +1,24 @@
+=pod
+
+=head1 NAME
+
+rt-9385 - bug in blank lines of HTML blocks
+
+=head1 DESCRIPTION
+
+This pod demonstrates a problem logged in
+L<http://rt.perl.org/rt3/Ticket/Display.html?id=9385|RT #9385>.
+
+=begin html
+
+<pre>
+#include &lt;stdio.h&gt;
+
+int main(int argc,char *argv[]) {
+    printf("RT #9385\n");
+    return 0;
+
+}
+</pre>
+
+=end html

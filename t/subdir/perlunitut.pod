@@ -1,0 +1,11 @@
+=head1 NAME
+
+perlunitut - Perl Unicode Tutorial
+
+=head1 DESCRIPTION
+
+The days of just flinging strings around are over. It's well established that
+modern programs need to be capable of communicating funny accented letters, and
+things like euro symbols. This means that programmers need new habits. It's
+easy to program Unicode capable software, but it does require discipline to do
+it right.

@@ -1,7 +1,7 @@
 --- #YAML:1.0
 name:                Pod-L10N
-version:             0.03
-abstract:            ~
+version:             0.03_01
+abstract:            handle POD with L10N
 license:             perl
 author:              
     - SHIRAKATA Kentaro <argrath@cpan.org>

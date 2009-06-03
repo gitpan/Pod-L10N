@@ -1,0 +1,9 @@
+=head1 NAME
+
+unclosed - test unclosed POD constructs.
+
+This is B<bold
+
+This is C<code
+
+=cut

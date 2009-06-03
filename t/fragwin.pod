@@ -1,0 +1,9 @@
+=head1 NAME
+
+fragdos - a POD fragment with MS-DOS line endings
+
+=head1 DESCRIPTION
+
+    640K ought to be enough for anyone.
+
+=cut
