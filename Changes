@@ -1,5 +1,9 @@
 Revision history for Perl extension Pod::L10N.
 
+0.03_02 Thu Jun  5 00:57:10 JST 2009
+
+	- eliminate some warnings
+
 0.03_01 Thu Jun  4 00:23:12 JST 2009
 
 	- change base to Pod::Html 1.09_04

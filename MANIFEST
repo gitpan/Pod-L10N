@@ -7,6 +7,7 @@ MANIFEST
 README
 t/00_compile.t
 t/11_substitute.t
+t/12_minimal.t
 t/99_pod.t
 t/01_core.t
 t/02_exception.t
@@ -34,6 +35,7 @@ t/htmlviec.html
 t/htmlviei.html
 t/htmlview.html
 t/htmlview.pod
+t/minimal.pod
 t/noheadi.html
 t/noheads.html
 t/noheads.out

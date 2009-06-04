@@ -1,4 +1,7 @@
-use Test::More tests => 1;
+#!/usr/bin/perl -w
+
+use strict;
+use Test::More;
 
 use Cwd;
 use Pod::L10N::Html;
@@ -16,47 +19,45 @@ END {
     1 while unlink "pod2htmi.tmp";
 }
 
+if ($] < 5.007) {
+    plan skip_all => "Test::Output unreliable on 5.6.x, this is $]";
+}
+elsif (do {eval "use Test::Output" or $@}) {
+    plan skip_all =>'Test::Output not available';
+}
+else {
+    plan tests => 1;
+}
+
+
 my $CWD      = Cwd::cwd();
 my $CACHEDIR = "$CWD/subdir";
 
-# l10n conversion
-convert_ok("substitute.pod", "substitute.html", "l10n substitution");
-
-sub slurp {
-    my $file = shift;
-    open my $in, $file or die "cannot open $file for input: $!";
-    local $/ = undef;
-    my $rec = <$in>;
-    close $in;
-    return $rec;
-}
+	convert_ok("minimal.pod", "xminimal.html", "minimal", <<EOM, ["--cachedir=$CACHEDIR"]
+EOM
+);
 
 sub convert_ok {
     my $podfile  = shift;
     my $htmlfile = shift;
     my $testname = shift;
+    my $expect = shift;
     my @extra_args = @{shift || []};
 
     my $base_dir = catdir $CWD, updir(), $ENV{PERL_CORE} ? ("lib", "Pod") : (curdir());
     my $infile   = $podfile;
     my $outfile  = "$htmlfile-t";
 
-    Pod::L10N::Html::pod2html(
+
+    stderr_is(
+	sub {Pod::L10N::Html::pod2html(
         "--podpath=t",
         "--podroot=$base_dir",
         "--infile=$infile",
         "--outfile=$outfile",
         @extra_args,
-    );
-
-    my $result = slurp($outfile);
-
-    my $expect = slurp($htmlfile);
-    $expect =~ s/\[PERLADMIN\]/$Config::Config{perladmin}/;
-
-    is($expect, $result, $testname) and do {
+	    )}, $expect, $testname) and do {
         # remove the results if the test succeeded
         1 while unlink $outfile;
     };
 }
-

@@ -3,7 +3,7 @@ use strict;
 require Exporter;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
-$VERSION = '0.03_01';
+$VERSION = '0.03_02';
 @ISA = qw(Exporter);
 @EXPORT = qw(pod2html htmlify);
 @EXPORT_OK = qw(anchorify);
@@ -224,10 +224,15 @@ sub pod2html {
 	TITLE_SEARCH: {
  	    for (my $i = 0; $i < @poddata; $i++) {
 		if ($poddata[$i] =~ /^=head1\s*NAME\b/m) {
- 		    for my $para ( @poddata[$i+4, $i+1] ) {
-			last TITLE_SEARCH
-			    if ($Title) = $para =~ /(\S+\s+-+.*\S)/s;
+		    my $para;
+		    # detect L10N-ed NAME
+		    if($poddata[$i + 1] =~ /=begin original/){
+			$para = $poddata[$i + 4];
+		    } else {
+			$para = $poddata[$i + 1];
 		    }
+		    last TITLE_SEARCH
+		      if ($Title) = $para =~ /(\S+\s+-+.*\S)/s;
 		}
 
 	    }
@@ -263,8 +268,9 @@ sub pod2html {
       $tdstyle = '';
     }
 
-    for (my $i = 0; $i < @poddata; $i++) {
-	if ($poddata[$i] =~ /^=encoding\s*([-_\w]*)/m) {
+    # detect =encoding
+    for (@poddata) {
+	if (/^=encoding\s*([-_\w]*)/m) {
 	    $Encoding = $1;
 	    last;
 	}

@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Pod-L10N
-version:             0.03_01
+version:             0.03_02
 abstract:            handle POD with L10N
 license:             perl
 author:              
