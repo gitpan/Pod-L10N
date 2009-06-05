@@ -1,5 +1,9 @@
 Revision history for Perl extension Pod::L10N.
 
+0.04    Thu Jun  5 18:53:26 JST 2009
+
+	- add pod
+
 0.03_02 Thu Jun  5 00:57:10 JST 2009
 
 	- eliminate some warnings

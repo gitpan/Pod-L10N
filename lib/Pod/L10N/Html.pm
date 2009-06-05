@@ -3,7 +3,7 @@ use strict;
 require Exporter;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
-$VERSION = '0.03_02';
+$VERSION = '0.04';
 @ISA = qw(Exporter);
 @EXPORT = qw(pod2html htmlify);
 @EXPORT_OK = qw(anchorify);
@@ -2107,7 +2107,29 @@ Its API is fully compatible with L<Pod::Html>.
 If input files support L<Pod::L10N::Format> extended format,
 Pod::L10N::Html do some more works to print translated text pretty well.
 
-Also, Pod::L10N::Html has limited support for C<=encoding> command.
+=head1 ADDITIONAL FEATURES
+
+Additional features from Pod::Html 1.09_04 are:
+
+=over
+
+=item *
+
+Support L<Pod::L10N::Format> extended format.
+
+=item *
+
+Support C<=encoding> command with some limitations.
+
+=item *
+
+Suppress link anchor to non-exist module.
+
+=item *
+
+Suppress warning about trailing X tag.
+
+=back
 
 =head1 FUNCTIONS
 
