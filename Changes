@@ -1,5 +1,11 @@
 Revision history for Perl extension Pod::L10N.
 
+0.05    Thu Jun  19 23:40:42 JST 2009
+
+	- adjust test for pre-5.8
+	- more support for =encoding
+	- fix bug about headings with formattings codes
+
 0.04    Thu Jun  5 18:53:26 JST 2009
 
 	- add pod

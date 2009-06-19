@@ -67,8 +67,6 @@ stderr_is( sub {pod2html(
         "--verbose",
     )}, <<EOM, 'xref norecurse' );
 Scanning for sections in input file(s)
-t/03_output.t: t/xref.pod: cannot resolve L<torture/GWAP> in paragraph .
-t/03_output.t: t/xref.pod: cannot resolve L<Test Torture|torture> in paragraph .
 scanning directories in pod-path
 caching items for later use
 caching directories for later use

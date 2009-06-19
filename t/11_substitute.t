@@ -54,7 +54,7 @@ sub convert_ok {
     my $expect = slurp($htmlfile);
     $expect =~ s/\[PERLADMIN\]/$Config::Config{perladmin}/;
 
-    is($expect, $result, $testname) and do {
+    is($result, $expect, $testname) and do {
         # remove the results if the test succeeded
         1 while unlink $outfile;
     };

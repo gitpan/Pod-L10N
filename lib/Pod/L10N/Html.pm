@@ -3,7 +3,7 @@ use strict;
 require Exporter;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
-$VERSION = '0.04';
+$VERSION = '0.05';
 @ISA = qw(Exporter);
 @EXPORT = qw(pod2html htmlify);
 @EXPORT_OK = qw(anchorify);
@@ -61,7 +61,7 @@ my %alttext;
 my @deleted;
 
 my $Encoding;
-my $Encoding_Header;
+my $Encoding_XML;
 
 _init_globals();
 
@@ -117,6 +117,7 @@ sub _init_globals {
     $Is83 = $^O eq 'dos';       # Is it an 8.3 filesystem?
 
     $Encoding = 'utf-8';		# encoding of pod
+    $Encoding_XML = '';		# encoding for xml declaration
 }
 
 #
@@ -272,6 +273,7 @@ sub pod2html {
     for (@poddata) {
 	if (/^=encoding\s*([-_\w]*)/m) {
 	    $Encoding = $1;
+	    $Encoding_XML = "encoding=\'$Encoding\' ";
 	    last;
 	}
     }
@@ -285,7 +287,7 @@ sub pod2html {
 END_OF_BLOCK
 
     print HTML <<END_OF_HEAD;
-<?xml version="1.0" ?>
+<?xml version="1.0" $Encoding_XML?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -363,7 +365,7 @@ END_OF_INDEX
 		} elsif (/^=for\s+(\S+)\s*(.*)/si) {# =for
 		    _process_for($1,$2);
 		} elsif (/^=encoding\s+(\S+)/si) {# =encoding
-		    ; # do nothing yet
+		    ; # do nothing here
 		} else {
 		    /^=(\S*)\s*/;
 		    warn "$0: $Podfile: unknown pod directive '$1' in "
@@ -841,18 +843,18 @@ sub _scan_headings {
       my $line = $data[$i];
       if ($line =~ /^=(head)([1-6])\s+(.*)/) {
         ($tag, $which_head, $otitle) = ($1,$2,$3);
-        my $next = $data[$i + 1];
-        _process_text(\$next);
 
         my $title = _depod( $otitle );
         my $name = anchorify( $title );
+        #L10N
+        my $next = $data[$i + 1];
+        if ($next =~ /^\((.*)\).?$/s){
+          $alttext{$otitle} = $1;
+          $deleted[$i + 1] = 1;
+          $otitle = $1;
+        }
         $$sections{$name} = 1;
         $title = _process_text( \$otitle );
-        if ($next =~ /^\((.*)\).?$/s){
-          $alttext{$title} = $1;
-          $deleted[$i + 1] = 1;
-          $title = $1;
-        }
 
 	    while ($which_head != $listdepth) {
 		if ($which_head > $listdepth) {
@@ -942,13 +944,14 @@ sub _process_head {
     }
 
     my $name = anchorify( _depod( $heading ) );
-    my $convert = _process_text( \$heading );
-	# print alttext on head
-    chomp $convert;
-    my $alt = $alttext{$convert};
+
+    #alttext
+    my $alt = $alttext{$heading};
     if(defined $alt){
-	  $convert = $alt;
+	  $heading = $alt;
     }
+
+    my $convert = _process_text( \$heading );
     print HTML "<h$level><a name=\"$name\">$convert</a></h$level>\n";
 }
 
@@ -973,13 +976,13 @@ sub _emit_item_tag($$$){
     } else {
         my $name = $item;
         $name = anchorify($name);
-	# item substitution
-	my $convert = $otext;
-	my $alt = $alttext{_depod($convert)};
-	if(defined $alt){
-	    $convert = $alt;
-	}
-	print HTML qq{<a name="$name" class="item">}, _process_text( \$convert ), '</a>';
+        # item substitution
+        my $convert = $otext;
+        my $alt = $alttext{_depod($convert)};
+        if(defined $alt){
+            $convert = $alt;
+        }
+        print HTML qq{<a name="$name" class="item">}, _process_text( \$convert ), '</a>';
     }
     print HTML "</strong>";
     undef( $EmittedItem );
@@ -2119,7 +2122,7 @@ Support L<Pod::L10N::Format> extended format.
 
 =item *
 
-Support C<=encoding> command with some limitations.
+Support C<=encoding> command.
 
 =item *
 
@@ -2127,7 +2130,7 @@ Suppress link anchor to non-exist module.
 
 =item *
 
-Suppress warning about trailing X tag.
+Suppress warning about headings trailing X tag.
 
 =back
 
@@ -2173,14 +2176,6 @@ See L<Pod::Html> for details.
 =head1 ENVIRONMENT
 
 Uses C<$Config{pod2html}> to setup default options.
-
-=head1 BUGS
-
-=over
-
-=item C<=encoding> support has some limitations.
-
-=back
 
 =head1 AUTHOR
 

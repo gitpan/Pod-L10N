@@ -14,3 +14,8 @@
 =back
 
 L</title>, L<< /item >>, L<Foo::Bar>
+
+=head2 L<substitute> link on head
+
+(head ¤Ç¤Î L<substitute>)
+
