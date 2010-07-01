@@ -6,7 +6,7 @@ use Test::More tests => 26;
 use Cwd;
 use Pod::L10N::Html;
 use Config;
-use File::Spec::Functions;
+use File::Spec::Unix;
 
 BEGIN {
     chdir 't' if -d 't';
@@ -136,7 +136,7 @@ sub convert_ok {
     my $testname = shift;
     my @extra_args = @{shift || []};
 
-    my $base_dir = catdir $CWD, updir(), $ENV{PERL_CORE} ? ("lib", "Pod") : (curdir());
+    my $base_dir = catdir($CWD, updir(), $ENV{PERL_CORE} ? ("lib", "Pod") : (curdir()));
     my $infile   = $podfile;
     my $outfile  = "$htmlfile-t";
 
@@ -158,3 +158,24 @@ sub convert_ok {
         1 while unlink $outfile;
     };
 }
+
+sub catdir {
+    File::Spec::Unix->catdir(@_);
+}
+
+sub catfile {
+    File::Spec::Unix->catfile(@_);
+}
+
+sub canonpath {
+    File::Spec::Unix->canonpath(@_);
+}
+
+sub curdir {
+    File::Spec::Unix->curdir(@_);
+}
+
+sub updir {
+    File::Spec::Unix->updir(@_);
+}
+
