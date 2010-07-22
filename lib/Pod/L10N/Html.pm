@@ -3,7 +3,7 @@ use strict;
 require Exporter;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
-$VERSION = '0.06';
+$VERSION = '0.07';
 @ISA = qw(Exporter);
 @EXPORT = qw(pod2html htmlify);
 @EXPORT_OK = qw(anchorify);
@@ -926,7 +926,7 @@ sub _scan_items {
 sub _process_head {
     my($tag, $heading, $hasindex) = @_;
 
-    $heading =~ s/X<.*//; # remove cross reference
+    $heading =~ s/\n?X<.*//; # remove cross reference
 
     # figure out the level of the =head
     $tag =~ /head([1-6])/;

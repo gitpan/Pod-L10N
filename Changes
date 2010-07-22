@@ -1,5 +1,9 @@
 Revision history for Perl extension Pod::L10N.
 
+0.07    Thu Jul  22 17:52:18 JST 2010
+
+	- fix bug that head with X<> cannot substitute correctly
+
 0.06    Thu Jul   1 20:19:50 JST 2010
 
 	- adjust test for Non-Unix

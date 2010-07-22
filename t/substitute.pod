@@ -19,3 +19,8 @@ L</title>, L<< /item >>, L<Foo::Bar>
 
 (head での L<substitute>)
 
+=head2 head and X tag
+X<Xtag>
+
+(X タグつき head)
+
