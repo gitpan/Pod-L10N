@@ -1,13 +1,47 @@
---- #YAML:1.0
-name:                Pod-L10N
-version:             0.07
-abstract:            handle POD with L10N
-license:             perl
-author:              
-    - SHIRAKATA Kentaro <argrath@cpan.org>
-generated_by:        ExtUtils::MakeMaker version 6.42
-distribution_type:   module
-requires:     
+---
+abstract: "Pod with L10N\r"
+author:
+  - "SHIRAKATA Kentaro <argrath@cpan.org>\r"
+build_requires:
+  ExtUtils::MakeMaker: 0
+  Test::Exception: 0
+configure_requires:
+  CPAN::Meta: 0
+  CPAN::Meta::Prereqs: 0
+  Module::Build: 0.38
+dynamic_config: 0
+generated_by: 'Minilla/v0.7.3, CPAN::Meta::Converter version 2.132661'
+license: perl
 meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
-    version: 1.3
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Pod-L10N
+no_index:
+  directory:
+    - t
+    - xt
+    - inc
+    - share
+    - eg
+    - examples
+    - author
+provides:
+  Pod::L10N:
+    file: lib/Pod/L10N.pm
+    version: 1.00
+  Pod::L10N::Html:
+    file: lib/Pod/L10N/Html.pm
+    version: 1.00
+  Pod::L10N::Model:
+    file: lib/Pod/L10N/Model.pm
+  Pod::Simple::XHTML::LocalPodLinks:
+    file: lib/Pod/L10N/Html.pm
+requires:
+  Pod::Simple: 3.18
+resources:
+  bugtracker: https://github.com/argrath/Pod-L10N/issues
+  homepage: https://github.com/argrath/Pod-L10N
+  repository: https://github.com/argrath/Pod-L10N.git
+version: 1.00
+x_contributors:
+  - 'SHIRAKATA Kentaro <argrath@ub32.org>'

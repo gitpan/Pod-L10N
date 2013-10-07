@@ -1,8 +1,0 @@
-=head1 NAME
-
-minimal - minimal pod
-
-=head1 IMPLEMENTATION
-
-minimal paragraph.
-
