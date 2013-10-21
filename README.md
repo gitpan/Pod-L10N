@@ -13,5 +13,4 @@ SHIRAKATA Kentaro <argrath@cpan.org>
 # LICENSE
 
 
-This library is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
+This program is distributed under the Artistic License.

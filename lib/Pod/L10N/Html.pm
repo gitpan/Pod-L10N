@@ -3,7 +3,7 @@ use strict;
 require Exporter;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
-$VERSION = '1.00_01';
+$VERSION = '1.01';
 @ISA = qw(Exporter);
 @EXPORT = qw(pod2htmll10n htmlify);
 @EXPORT_OK = qw(anchorify);
@@ -23,18 +23,33 @@ use locale; # make \w work right in non-ASCII lands
 
 =head1 NAME
 
-Pod::Html - module to convert pod files to HTML
+Pod::L10N::Html - module to convert pod files to HTML with L10N
 
 =head1 SYNOPSIS
 
-    use Pod::Html;
+    use Pod::L10N::Html;
     pod2html([options]);
 
 =head1 DESCRIPTION
 
-Converts files from pod format (see L<perlpod>) to HTML format.  It
-can automatically generate indexes and cross-references, and it keeps
-a cache of things it knows how to cross-reference.
+Converts files from pod format (see L<perlpod>) to HTML format.
+
+Its API is fully compatible with L<Pod::Html>.
+
+If input files support L<Pod::L10N::Format> extended format,
+Pod::L10N::Html do some more works to print translated text pretty well.
+
+=head1 ADDITIONAL FEATURES
+
+Additional features from Pod::Html 1.1512 are:
+
+=over
+
+=item *
+
+Support L<Pod::L10N::Format> extended format.
+
+=back
 
 =head1 FUNCTIONS
 
@@ -48,163 +63,19 @@ a cache of things it knows how to cross-reference.
              "--infile=foo.pod",
              "--outfile=/perl/nmanual/foo.html");
 
-pod2html takes the following arguments:
-
-=over 4
-
-=item backlink
-
-    --backlink
-
-Turns every C<head1> heading into a link back to the top of the page.
-By default, no backlinks are generated.
-
-=item cachedir
-
-    --cachedir=name
-
-Creates the directory cache in the given directory.
-
-=item css
-
-    --css=stylesheet
-
-Specify the URL of a cascading style sheet.  Also disables all HTML/CSS
-C<style> attributes that are output by default (to avoid conflicts).
-
-=item flush
-
-    --flush
-
-Flushes the directory cache.
-
-=item header
-
-    --header
-    --noheader
-
-Creates header and footer blocks containing the text of the C<NAME>
-section.  By default, no headers are generated.
-
-=item help
-
-    --help
-
-Displays the usage message.
-
-=item htmldir
-
-    --htmldir=name
-
-Sets the directory to which all cross references in the resulting
-html file will be relative. Not passing this causes all links to be
-absolute since this is the value that tells Pod::Html the root of the 
-documentation tree.
-
-Do not use this and --htmlroot in the same call to pod2html; they are
-mutually exclusive.
-
-=item htmlroot
-
-    --htmlroot=name
-
-Sets the base URL for the HTML files.  When cross-references are made,
-the HTML root is prepended to the URL.
-
-Do not use this if relative links are desired: use --htmldir instead.
-
-Do not pass both this and --htmldir to pod2html; they are mutually
-exclusive.
-
-=item index
-
-    --index
-    --noindex
-
-Generate an index at the top of the HTML file.  This is the default
-behaviour.
-
-=item infile
-
-    --infile=name
-
-Specify the pod file to convert.  Input is taken from STDIN if no
-infile is specified.
-
-=item outfile
-
-    --outfile=name
-
-Specify the HTML file to create.  Output goes to STDOUT if no outfile
-is specified.
-
-=item poderrors
-
-    --poderrors
-    --nopoderrors
-
-Include a "POD ERRORS" section in the outfile if there were any POD 
-errors in the infile. This section is included by default.
-
-=item podpath
-
-    --podpath=name:...:name
-
-Specify which subdirectories of the podroot contain pod files whose
-HTML converted forms can be linked to in cross references.
-
-=item podroot
-
-    --podroot=name
-
-Specify the base directory for finding library pods. Default is the
-current working directory.
-
-=item quiet
-
-    --quiet
-    --noquiet
-
-Don't display I<mostly harmless> warning messages.  These messages
-will be displayed by default.  But this is not the same as C<verbose>
-mode.
-
-=item recurse
-
-    --recurse
-    --norecurse
-
-Recurse into subdirectories specified in podpath (default behaviour).
-
-=item title
-
-    --title=title
-
-Specify the title of the resulting HTML file.
-
-=item verbose
-
-    --verbose
-    --noverbose
-
-Display progress messages.  By default, they won't be displayed.
-
-=back
+See L<Pod::Html> for details.
 
 =head2 htmlify
 
     htmlify($heading);
 
-Converts a pod section specification to a suitable section specification
-for HTML. Note that we keep spaces and special characters except
-C<", ?> (Netscape problem) and the hyphen (writer's problem...).
+See L<Pod::Html> for details.
 
 =head2 anchorify
 
     anchorify(@heading);
 
-Similar to C<htmlify()>, but turns non-alphanumerics into underscores.  Note
-that C<anchorify()> is not exported by default.
+See L<Pod::Html> for details.
 
 =head1 ENVIRONMENT
 
@@ -212,13 +83,15 @@ Uses C<$Config{pod2html}> to setup default options.
 
 =head1 AUTHOR
 
+Pod::L10N::Html is based on L<Pod::Html> Version 1.1512 written by
 Marc Green, E<lt>marcgreen@cpan.orgE<gt>. 
 
-Original version by Tom Christiansen, E<lt>tchrist@perl.comE<gt>.
+Modification to Pod::L10N::Html is written by SHIRAKATA Kentaro,
+E<lt>argrath@cpan.orgE<gt>.
 
 =head1 SEE ALSO
 
-L<perlpod>
+L<perlpod>, L<Pod::Html>, L<Pod::L10N::Format>
 
 =head1 COPYRIGHT
 

@@ -1,5 +1,10 @@
 Revision history for Perl module Pod::L10N
 
+1.01 2013-10-21T18:15:52Z
+
+	- recover pod
+	- adjust license
+
 1.00_01 2013-10-10T08:19:13Z
 
 	- change timestamp (#1)
